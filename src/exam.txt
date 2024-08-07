@@ -1,0 +1,44 @@
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [form, setForm] = useState("FILL THE FORM");
+  const [disabled, setDisabled] = useState(false);
+  const [student, setStudent] = useState("");
+  const [input, setInput] = useState("");
+  const handleClick = () => {
+    setForm("Form submitted successfully!");
+    setDisabled(true);
+    console.log("Form submitted successfully!");
+  };
+  const students = ["arslan", "Ali", "abbas"];
+  const handleRefresh = (e) => {
+    setForm("FILL THE FORM");
+    setDisabled(false);
+    setInput("");
+  };
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    console.log(e.target.value);
+  };
+  return (
+    <>
+      <h3>{form}</h3>
+      <input value={input} type="text" placeholder="entername" onChange={handleChange} />
+      <button disabled={disabled} onClick={handleClick}>
+        click me
+      </button>
+      <button onClick={handleRefresh}>Refresh</button>
+      <br />
+      <h3>All Students</h3>
+      <ul>
+        {students.map((student, index) => (
+          <li key={index}>{student}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default App;
