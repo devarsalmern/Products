@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Products = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState("");
 
   const fetchProducts = async () => {
     try {
@@ -24,17 +25,29 @@ const Products = () => {
   return (
     <>
       <h1>ProductPage</h1>
+      <input
+        className="product-card"
+        type="text"
+        placeholder="search products here"
+        onChange={(e) => setSearch(e.target.value.toLowerCase())}
+      />
       <div className="product-list">
         {products.length > 0 ? (
-          products.map((product, index) => (
-            <ProductCard
-              key={index}
-              product={product}
-              clickHandler={() => {
-                navigate("/product-details/" + product.id);
-              }}
-            />
-          ))
+          products
+            .filter((product) => {
+              return search
+                ? product.title.toLowerCase().includes(search)
+                : true;
+            })
+            .map((product, index) => (
+              <ProductCard
+                key={index}
+                product={product}
+                clickHandler={() => {
+                  navigate("/product-details/" + product.id);
+                }}
+              />
+            ))
         ) : (
           <p>No products available</p>
         )}

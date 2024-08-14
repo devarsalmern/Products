@@ -7,8 +7,9 @@ import UserAuth from "./Pages/UserAuth";
 import SignUpPage from "./Pages/SignUp";
 import LoginPage from "./Pages/Login";
 import MainLayout from "./layouts/MainLayout";
-
-import Categories from "./Pages/Categories";
+import Categories from "./Pages/Category";
+import ProfilePage from "./Pages/Profile";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   return (
@@ -24,14 +25,21 @@ const App = () => {
         />
         //if no value passed to index then it's default vslue is boolean true
         <Route
-          path="categories"
+          path="category"
           element={
             <MainLayout>
               <Categories />
             </MainLayout>
           }
         />
-        <Route path="products" element={<Products />} />
+        <Route
+          path="products"
+          element={
+            <MainLayout>
+              <Products />
+            </MainLayout>
+          }
+        />
         <Route
           path="/product-details/:productId?"
           element={<ProductDetails />}
@@ -49,6 +57,16 @@ const App = () => {
           <Route path="signup" element={<SignUpPage />} />
           <Route path="login" element={<LoginPage />} />
         </Route>
+        <Route
+          path="profile"
+          element={
+            <PrivateRoute>
+              <MainLayout>
+                <ProfilePage />
+              </MainLayout>
+            </PrivateRoute>
+          }
+        />
         <Route path="*" element={<Error />} />
       </Routes>
     </>
