@@ -25,12 +25,14 @@ const Products = () => {
   return (
     <>
       <h1>ProductPage</h1>
-      <input
-        className="product-card"
-        type="text"
-        placeholder="search products here"
-        onChange={(e) => setSearch(e.target.value.toLowerCase())}
-      />
+      <div className="mb-4">
+        <input
+          className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg"
+          type="text"
+          placeholder="search products here"
+          onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        />
+      </div>
       <div className="product-list">
         {products.length > 0 ? (
           products
